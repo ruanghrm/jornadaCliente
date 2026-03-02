@@ -1,0 +1,544 @@
+/* components/Usinas/deviceView.css */
+
+.device-view {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+}
+
+/* HEADER */
+.device-header {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.device-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.device-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.device-title-icon {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.device-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.device-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.device-subtitle-label {
+  font-weight: 500;
+  color: #475569;
+}
+
+.device-back-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.device-back-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* SECTIONS */
+.device-section {
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.section-header-icon {
+  background: #3b82f6;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.last-update {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* DEVICE INFO CARD */
+.device-info-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.device-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.device-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.device-info-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.device-info-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 8px 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.device-info-value.highlight {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-left-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+/* REALTIME STATS */
+.realtime-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.realtime-stat-card {
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.realtime-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: #3b82f6;
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+}
+
+.power-value {
+  font-size: 2.25rem !important;
+  color: #3b82f6 !important;
+}
+
+/* TECHNICAL DETAILS */
+.technical-details-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+}
+
+.technical-details-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.technical-details-header svg {
+  color: #3b82f6;
+}
+
+.technical-details-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.technical-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.technical-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.technical-detail-label {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.technical-detail-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.technical-detail-value:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+
+/* GRANULARITY SELECTOR */
+.granularity-selector-card {
+  padding: 16px;
+  margin-bottom: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.granularity-selector {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.granularity-button {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.granularity-button:hover {
+  transform: translateY(-2px);
+}
+
+/* HISTORY STATS */
+.history-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.history-stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.history-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.history-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.total-icon {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.average-icon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.best-icon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.history-stat-content {
+  flex: 1;
+}
+
+.history-stat-label {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.history-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.history-stat-date {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* CHART */
+.chart-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Adicione ao final do arquivo usinasView.css */
+
+.period-input-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.period-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.period-input-group label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.period-submit-button {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.flex {
+  display: flex;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.chart-container {
+  height: 350px;
+  width: 100%;
+}
+
+.chart-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.chart-loading-text {
+  color: #64748b;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.chart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 16px;
+}
+
+.chart-empty-icon {
+  color: #cbd5e1;
+}
+
+.chart-empty-text {
+  color: #64748b;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 400px;
+}
+
+.no-data-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.device-view > * {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.device-view > *:nth-child(1) { animation-delay: 0.1s; }
+.device-view > *:nth-child(2) { animation-delay: 0.2s; }
+.device-view > *:nth-child(3) { animation-delay: 0.3s; }
+.device-view > *:nth-child(4) { animation-delay: 0.4s; }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .device-view {
+    padding: 12px;
+  }
+  
+  .device-header-content {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .device-back-button {
+    align-self: stretch;
+    text-align: center;
+  }
+  
+  .device-info-grid,
+  .realtime-stats-grid,
+  .technical-details-grid,
+  .history-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .granularity-selector {
+    flex-direction: column;
+  }
+  
+  .granularity-button {
+    width: 100%;
+  }
+  
+  .section-header {
+    flex-wrap: wrap;
+  }
+  
+  .last-update {
+    order: 3;
+    width: 100;
+    justify-content: center;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .device-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+}
+
+/* UTILITY CLASSES */
+.highlight {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

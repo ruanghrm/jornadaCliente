@@ -1,0 +1,8 @@
+/* app.css - reset de layout para o painel full-screen */
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}

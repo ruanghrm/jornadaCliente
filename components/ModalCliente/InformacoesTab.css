@@ -1,0 +1,433 @@
+/* InformacoesTab.css */
+
+:root {
+  --primary: #FF7A2D;
+  --primary-light: #ff9f5c;
+  --primary-dark: #e05e1a;
+  --primary-gradient: linear-gradient(135deg, #FF7A2D 0%, #ff9f5c 100%);
+  --primary-soft: #fff3e5;
+  --primary-alpha: rgba(255, 122, 45, 0.1);
+  --primary-bg-soft: rgba(255, 122, 45, 0.03); /* Fundo muito suave */
+}
+
+.informacoes-tab {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Tags Section - AGORA COM FUNDO BRANCO */
+.tags-section {
+  margin-bottom: 28px;
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #edf2f7;
+  position: relative;
+}
+
+.tags-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tags-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tags-header h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--primary-gradient);
+  border-radius: 4px;
+}
+
+/* Select container - REDUZIDO */
+.select-container {
+  position: relative;
+  width: 240px; /* Reduzido de 300px */
+}
+
+.tag-select {
+  width: 80%;
+  padding: 8px 32px 8px 12px; /* Padding vertical reduzido */
+  border-radius: 30px; /* Reduzido */
+  border: 1.5px solid #e5e7eb;
+  background: white;
+  font-size: 13px; /* Reduzido */
+  color: #1f2937;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag-select:hover {
+  border-color: var(--primary-light);
+  background: var(--primary-soft);
+}
+
+.tag-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-alpha);
+}
+
+.tag-select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+/* Dropdown personalizado para tags - CORRIGIDO */
+.tags-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%; /* Usar width em vez de right */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  z-index: 9999; /* Z-index maior */
+  max-height: 200px; /* Altura máxima reduzida */
+  overflow-y: auto;
+  animation: slideDown 0.2s ease;
+  border: 1px solid #edf2f7;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  padding: 8px 12px; /* Padding reduzido */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: var(--primary-soft);
+}
+
+.dropdown-item .tag-badge {
+  transform: scale(0.95); /* Tags um pouco menores no dropdown */
+}
+
+/* Tags container */
+.tags-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 40px;
+  margin-top: 8px;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border-radius: 40px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  animation: slideIn 0.3s ease;
+  border: 1px solid #f1f5f9;
+}
+
+.tag-item:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 4px 12px rgba(255, 122, 45, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.tag-remove-btn {
+  background: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 4px;
+}
+
+.tag-remove-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  transform: rotate(90deg);
+}
+
+.empty-tags {
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 8px 16px;
+  background: #f8fafc;
+  border-radius: 30px;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  border: 1px dashed #e2e8f0;
+}
+
+/* Info Section - AGORA COM FUNDO LARANJA SUAVE */
+.info-section {
+  background: var(--primary-bg-soft);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255, 122, 45, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito de fundo com opacidade reduzida */
+.info-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 122, 45, 0.03) 0%, transparent 70%);
+  animation: rotate 30s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.info-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 122, 45, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.info-section h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--primary-gradient);
+  border-radius: 4px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.info-card-container {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 122, 45, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(10px);
+}
+
+.info-card-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(255, 122, 45, 0.08);
+  border-color: var(--primary-light);
+}
+
+.info-card-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.info-card-value {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info-card-value.multiline {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.info-card-value.success {
+  font-weight: 600;
+}
+
+.address-card {
+  grid-column: span 2;
+}
+
+.address-card .info-card-container {
+  background: linear-gradient(135deg, white 0%, #fff3e5 100%);
+  border-left: 4px solid var(--primary);
+}
+
+/* WhatsApp Section */
+.whatsapp-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 2px solid rgba(255, 122, 45, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.whatsapp-button {
+  flex-shrink: 0;
+  background: var(--primary-gradient);
+  border: none;
+  padding: 10px 28px; /* Reduzido */
+  border-radius: 40px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(255, 122, 45, 0.15);
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 122, 45, 0.25);
+}
+
+/* Animações */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Scrollbar personalizada */
+.tags-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tags-dropdown::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.tags-dropdown::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 8px;
+}
+
+.tags-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tags-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .select-container {
+    width: 100%;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .address-card {
+    grid-column: span 1;
+  }
+  
+  .whatsapp-section {
+    justify-content: center;
+  }
+  
+  .whatsapp-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tags-section,
+  .info-section {
+    padding: 16px;
+  }
+  
+  .tag-item {
+    width: 100%;
+  }
+  
+  .tag-item .tag-badge {
+    flex: 1;
+  }
+}
