@@ -120,6 +120,8 @@ const TabArquivos: React.FC<TabArquivosProps> = ({
   const getFileIcon = (filename: string, isImage: boolean, mimeType: string) => {
     if (isImage) return <ImageIcon size={20} className="file-icon" />;
     
+    console.log(`Arquivo: ${filename}`);
+
     const type = mimeType.split('/')[0];
     
     switch (type) {

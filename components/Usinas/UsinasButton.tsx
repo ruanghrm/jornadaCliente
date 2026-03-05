@@ -5,6 +5,7 @@ interface UsinaButtonProps {
   onClick: () => void
   variant?: "primary" | "secondary" | "ghost"
   icon?: React.ReactNode
+  disabled?: boolean;
   className?: string
 }
 

@@ -5,7 +5,11 @@
 
 body {
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   background-color: #fafafa;
   color: #1e1e1e;
   min-height: auto;
@@ -397,6 +401,8 @@ aside ul li.active {
   }
 }
 
-.card, .table-card, .topbar {
+.card,
+.table-card,
+.topbar {
   animation: fadeIn 0.5s ease-out;
 }

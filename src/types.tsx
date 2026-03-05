@@ -21,7 +21,6 @@ export interface Attachment {
   created_at: number;
 }
 
-
 // -----------------------------------------------------
 // CLIENTE
 // -----------------------------------------------------
@@ -191,7 +190,6 @@ export interface Comentario {
   };
   anexos?: Anexo[];
 }
-
 
 export interface Anexo {
   id: number;

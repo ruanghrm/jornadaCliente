@@ -1,5 +1,5 @@
 // src/pages/Mensagens.tsx
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Send, 
   Users, 
@@ -8,7 +8,6 @@ import {
   AlertCircle,
   X,
   Search,
-  ChevronDown,
   User,
   Mail,
   Loader,
@@ -16,8 +15,7 @@ import {
   Info,
   Star,
   MailCheck,
-  MailX,
-  UserCheck
+  MailX
 } from 'lucide-react';
 import '../components/ComponentsCSS/Mensagens.css';
 
@@ -173,8 +171,8 @@ export function Mensagens() {
       setMensagem('');
       setDestinatarios([]);
       setSelecionarTodos(false);
-      setShowUserSelect(false);
       
+      // Fechar seletor após 3 segundos
       setTimeout(() => {
         setResultadoEnvio(null);
       }, 5000);
@@ -198,6 +196,7 @@ export function Mensagens() {
     return matchesFiltro && matchesRole;
   });
 
+  // Roles únicas para o filtro
   const roles = ['todos', ...new Set(usuarios.map(u => u.role))];
 
   const getRoleLabel = (role: string) => {
@@ -222,12 +221,20 @@ export function Mensagens() {
 
   return (
     <div className="mensagens-container">
-      {/* Header com título */}
+      {/* Header com título e ações - igual ao Assinaturas */}
       <div className="header-section">
         <h1>
           <Bell size={28} />
           Gerenciar Mensagens
         </h1>
+        <div className="header-actions">
+          <button 
+            className="btn-success"
+            onClick={() => setShowUserSelect(!showUserSelect)}
+          >
+            <Users size={16} /> {showUserSelect ? 'Ocultar lista' : 'Selecionar destinatários'}
+          </button>
+        </div>
       </div>
 
       {/* Cards de Mensagens */}
@@ -281,113 +288,89 @@ export function Mensagens() {
                   <span className="input-counter">{mensagem.length}/500</span>
                 </div>
 
-                <div className="form-group">
-                  <label>
-                    <Users size={16} />
-                    Destinatários
-                    <span className="required">*</span>
-                  </label>
-                  
-                  {/* Botão de selecionar destinatários - AGORA DENTRO DO CARD */}
-                  <button
-                    onClick={() => setShowUserSelect(!showUserSelect)}
-                    className="select-destinatarios-btn"
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <UserCheck size={18} />
-                      {showUserSelect ? 'Ocultar lista de usuários' : 'Selecionar destinatários'}
-                    </div>
-                    <div className="destinatarios-preview">
-                      <Users size={14} />
-                      <span>{destinatarios.length}</span>
-                      <ChevronDown size={16} className={`chevron ${showUserSelect ? 'open' : ''}`} />
-                    </div>
-                  </button>
-
-                  {showUserSelect && (
-                    <div className="user-select-dropdown">
-                      <div className="user-select-header">
-                        <div className="search-box">
-                          <Search size={16} />
-                          <input
-                            type="text"
-                            placeholder="Buscar por nome ou email..."
-                            value={filtro}
-                            onChange={(e) => setFiltro(e.target.value)}
-                          />
-                        </div>
-
-                        <select 
-                          value={filtroRole} 
-                          onChange={(e) => setFiltroRole(e.target.value)}
-                          className="role-filter"
-                        >
-                          {roles.map(role => (
-                            <option key={role} value={role}>
-                              {role === 'todos' ? 'Todos os perfis' : getRoleLabel(role)}
-                            </option>
-                          ))}
-                        </select>
+                {showUserSelect && (
+                  <div className="user-select-dropdown">
+                    <div className="user-select-header">
+                      <div className="search-box">
+                        <Search size={16} />
+                        <input
+                          type="text"
+                          placeholder="Buscar por nome ou email..."
+                          value={filtro}
+                          onChange={(e) => setFiltro(e.target.value)}
+                        />
                       </div>
 
-                      <div className="user-select-actions">
-                        <label className="select-all">
-                          <input
-                            type="checkbox"
-                            checked={selecionarTodos}
-                            onChange={handleSelecionarTodos}
-                          />
-                          Selecionar todos ({usuariosFiltrados.length})
-                        </label>
-                        <span className="total-usuarios">
-                          Total: {totalUsuarios} usuários
-                        </span>
-                      </div>
+                      <select 
+                        value={filtroRole} 
+                        onChange={(e) => setFiltroRole(e.target.value)}
+                        className="role-filter"
+                      >
+                        {roles.map(role => (
+                          <option key={role} value={role}>
+                            {role === 'todos' ? 'Todos os perfis' : getRoleLabel(role)}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                      {carregandoUsuarios ? (
-                        <div className="loading-users">
-                          <Loader className="spinner" size={24} />
-                          <span>Carregando usuários...</span>
-                        </div>
-                      ) : (
-                        <div className="user-list">
-                          {usuariosFiltrados.map(usuario => (
-                            <label
-                              key={usuario.id}
-                              className={`user-item ${destinatarios.includes(usuario.id) ? 'selected' : ''}`}
-                            >
-                              <input
-                                type="checkbox"
-                                checked={destinatarios.includes(usuario.id)}
-                                onChange={() => handleToggleUsuario(usuario.id)}
-                              />
-                              <div className="user-info">
-                                <div className="user-name">
-                                  <User size={14} />
-                                  <span>{usuario.nome}</span>
-                                </div>
-                                <div className="user-email">
-                                  <Mail size={12} />
-                                  <span>{usuario.email}</span>
-                                </div>
+                    <div className="user-select-actions">
+                      <label className="select-all">
+                        <input
+                          type="checkbox"
+                          checked={selecionarTodos}
+                          onChange={handleSelecionarTodos}
+                        />
+                        Selecionar todos ({usuariosFiltrados.length})
+                      </label>
+                      <span className="total-usuarios">
+                        Total: {totalUsuarios} usuários
+                      </span>
+                    </div>
+
+                    {carregandoUsuarios ? (
+                      <div className="loading-users">
+                        <Loader className="spinner" size={24} />
+                        <span>Carregando usuários...</span>
+                      </div>
+                    ) : (
+                      <div className="user-list">
+                        {usuariosFiltrados.map(usuario => (
+                          <label
+                            key={usuario.id}
+                            className={`user-item ${destinatarios.includes(usuario.id) ? 'selected' : ''}`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={destinatarios.includes(usuario.id)}
+                              onChange={() => handleToggleUsuario(usuario.id)}
+                            />
+                            <div className="user-info">
+                              <div className="user-name">
+                                <User size={14} />
+                                <span>{usuario.nome}</span>
                               </div>
-                              <span className={`role-badge ${getRoleColor(usuario.role)}`}>
-                                {getRoleLabel(usuario.role)}
-                              </span>
-                            </label>
-                          ))}
-
-                          {usuariosFiltrados.length === 0 && (
-                            <div className="no-results">
-                              <AlertCircle size={24} />
-                              <p>Nenhum usuário encontrado</p>
+                              <div className="user-email">
+                                <Mail size={12} />
+                                <span>{usuario.email}</span>
+                              </div>
                             </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+                            <span className={`role-badge ${getRoleColor(usuario.role)}`}>
+                              {getRoleLabel(usuario.role)}
+                            </span>
+                          </label>
+                        ))}
+
+                        {usuariosFiltrados.length === 0 && (
+                          <div className="no-results">
+                            <AlertCircle size={24} />
+                            <p>Nenhum usuário encontrado</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {resultadoEnvio && (
                   <div className={`resultado-mensagem ${resultadoEnvio.tipo}`}>
@@ -432,60 +415,118 @@ export function Mensagens() {
             </div>
           </div>
 
-          {/* Card de Informações */}
-          <div className="mensagem-card info-card">
-            <div className="info-card-badge">
+          {/* Card de Informações - estilo igual ao plano Platinum */}
+          <div className="mensagem-card" style={{
+            border: '2px solid #28a745',
+            boxShadow: '0 4px 20px rgba(40, 167, 69, 0.3)'
+          }}>
+            <div className="mensagem-card-badge" style={{
+              background: '#28a745',
+              color: 'white',
+              padding: '0.25rem 1rem',
+              position: 'absolute',
+              top: '1rem',
+              right: '-2rem',
+              transform: 'rotate(45deg)',
+              fontSize: '0.8rem',
+              fontWeight: 'bold'
+            }}>
               <Star size={12} /> DICAS <Star size={12} />
             </div>
-            <div className="info-card-header">
-              <h3>
+            <div className="mensagem-card-header" style={{
+              background: 'linear-gradient(135deg, #28a745 0%, #20c997 100%)'
+            }}>
+              <h2>
                 <Info size={20} />
                 Sobre Mensagens Automáticas
-              </h3>
+              </h2>
             </div>
-            <div className="info-card-content">
-              <div className="info-item importante">
-                <strong>📌 Importante:</strong>
-                <p>As mensagens serão enviadas como notificações para os usuários selecionados.</p>
-              </div>
-              
-              <div className="info-item dicas">
-                <strong>🎯 Dicas:</strong>
-                <ul>
-                  <li>Use títulos claros e objetivos</li>
-                  <li>Seja específico na mensagem</li>
-                  <li>Selecione apenas os destinatários relevantes</li>
-                  <li>Evite enviar mensagens duplicadas</li>
-                </ul>
-              </div>
+            <div className="mensagem-card-body">
+              <div className="info-card-content">
+                <div className="info-item" style={{
+                  background: '#f8f9fa',
+                  borderLeft: '4px solid #28a745'
+                }}>
+                  <strong>📌 Importante:</strong>
+                  <p>As mensagens serão enviadas como notificações para os usuários selecionados.</p>
+                </div>
+                
+                <div className="info-item" style={{
+                  background: '#f8f9fa',
+                  borderLeft: '4px solid #ffc107'
+                }}>
+                  <strong>🎯 Dicas:</strong>
+                  <ul>
+                    <li>Use títulos claros e objetivos</li>
+                    <li>Seja específico na mensagem</li>
+                    <li>Selecione apenas os destinatários relevantes</li>
+                    <li>Evite enviar mensagens duplicadas</li>
+                  </ul>
+                </div>
 
-              <div className="info-stats">
-                <div className="stat total-users">
-                  <span className="stat-value">{totalUsuarios}</span>
-                  <span className="stat-label">Total de usuários</span>
+                <div className="info-stats">
+                  <div className="stat" style={{
+                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    color: 'white'
+                  }}>
+                    <span className="stat-value">{totalUsuarios}</span>
+                    <span className="stat-label">Total de usuários</span>
+                  </div>
+                  <div className="stat" style={{
+                    background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                    color: 'white'
+                  }}>
+                    <span className="stat-value">{destinatarios.length}</span>
+                    <span className="stat-label">Selecionados</span>
+                  </div>
                 </div>
-                <div className="stat selected-users">
-                  <span className="stat-value">{destinatarios.length}</span>
-                  <span className="stat-label">Selecionados</span>
-                </div>
-              </div>
 
-              {destinatarios.length === 0 && (
-                <div className="no-destinatarios-warning">
-                  <MailX size={20} />
-                  <span>Nenhum destinatário selecionado</span>
-                </div>
-              )}
+                {destinatarios.length === 0 && (
+                  <div style={{
+                    textAlign: 'center',
+                    padding: '1rem',
+                    background: '#fff3cd',
+                    color: '#856404',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    justifyContent: 'center'
+                  }}>
+                    <MailX size={20} />
+                    <span>Nenhum destinatário selecionado</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Loading Overlay */}
+      {/* Loading e Error - igual ao Assinaturas */}
       {enviando && (
-        <div className="loading-overlay">
-          <div className="spinner"></div>
-          <p>Enviando mensagem...</p>
+        <div className="loading-spinner" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(255,255,255,0.8)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000
+        }}>
+          <div className="spinner" style={{
+            width: '50px',
+            height: '50px',
+            border: '5px solid #f3f3f3',
+            borderTop: '5px solid #28a745',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }}></div>
+          <p style={{ marginTop: '1rem', color: '#333' }}>Enviando mensagem...</p>
         </div>
       )}
     </div>

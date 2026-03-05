@@ -234,6 +234,15 @@ const ModalUsinas: React.FC<Props> = ({ unidade, onClose, unidadesCache, integra
     }
   }, [selectedStation, carregarDadosPorPeriodo]);
 
+  const handlePeriodChangeWithPeriod = (tipo: 'dia' | 'mes' | 'ano' | 'period', data: string) => {
+  if (tipo === 'period') {
+    // Tratar caso especial 'period' se necessário
+    console.log('Period changed:', data);
+  } else {
+    handlePeriodChange(tipo, data);
+  }
+};
+
   // Transformar o array de history para o formato que UsinaView espera
   const historyData: FormattedHistory | null = history && history.length > 0 ? {
     points: history.map(point => ({
@@ -370,7 +379,7 @@ const ModalUsinas: React.FC<Props> = ({ unidade, onClose, unidadesCache, integra
                 granularity={granularity}
                 setGranularity={handleGranularityChange} // ← Usa a nova função
                 onDeviceClick={carregarDevice}
-                onPeriodChange={handlePeriodChange} // ← NOVA PROP
+                onPeriodChange={handlePeriodChangeWithPeriod} // ← NOVA PROP
                 selectedDate={dataSelecionada} // ← NOVA PROP
               />
             ) : (

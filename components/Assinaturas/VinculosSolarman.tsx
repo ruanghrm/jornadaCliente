@@ -43,15 +43,6 @@ interface GarantiaBase {
   status: boolean;
 }
 
-interface GarantiaPayload {
-  cliente_id: number;
-  contrato_id: number;
-  garantia_base_id: number;
-  data_inicio: string;
-  observacoes: string; // Vai conter apenas o ID da usina
-  nome: string;
-}
-
 const API_BASE_URL = 'https://backend.sansolenergiasolar.com.br/api/v1';
 
 const VinculosSolarman: React.FC<VinculosSolarmanProps> = ({ onError }) => {
@@ -178,50 +169,56 @@ const VinculosSolarman: React.FC<VinculosSolarmanProps> = ({ onError }) => {
     }
   }, [fetchWithAuth, buscarAssinaturaCliente, onError]);
 
-  // Função para associar garantia
+  // Função pra associar garantia
   const associarGarantia = async () => {
-    if (!selectedVinculo || !selectedVinculo.cliente || !selectedGarantiaId) return;
+  if (!selectedVinculo || !selectedVinculo.cliente || !selectedGarantiaId) return;
 
-    setGarantiaLoading(true);
-    setGarantiaError('');
-    setGarantiaSuccess(false);
+  setGarantiaLoading(true);
+  setGarantiaError('');
+  setGarantiaSuccess(false);
 
-    try {
-      // Busca a garantia selecionada para obter o nome
-      const garantiaSelecionada = garantiasBase.find(g => g.id === selectedGarantiaId);
-      
-      const payload: GarantiaPayload = {
-        cliente_id: selectedVinculo.cliente.id,
-        contrato_id: 1, // Fixo como 1
-        garantia_base_id: selectedGarantiaId,
-        data_inicio: new Date().toISOString(),
-        observacoes: selectedVinculo.vinculo.solarman_device_id, // Apenas o ID da usina
-        nome: `Garantia ${garantiaSelecionada?.nome || ''} - ${selectedVinculo.cliente.nome_completo}`
-      };
+  try {
+    const garantiaSelecionada = garantiasBase.find(
+      g => g.id === selectedGarantiaId
+    );
 
-      const result = await fetchWithAuth(`${API_BASE_URL}/garantias/emitir`, {
+    const payload = {
+      cliente_id: selectedVinculo.cliente.id,
+      usina_id: selectedVinculo.vinculo.solarman_device_id,
+      garantia_base_id: selectedGarantiaId,
+      data_inicio: new Date().toISOString(),
+      observacoes: `Usina ${selectedVinculo.vinculo.solarman_device_id}`,
+      nome: `Garantia ${garantiaSelecionada?.nome || ''} - ${selectedVinculo.cliente.nome_completo}`
+    };
+
+    console.log("Payload enviado para /garantias/emitir:");
+    console.log(JSON.stringify(payload, null, 2));
+
+    const result = await fetchWithAuth(
+      `${API_BASE_URL}/garantias/emitir`,
+      {
         method: 'POST',
         body: JSON.stringify(payload)
-      });
+      }
+    );
 
-      console.log('Garantia associada com sucesso:', result);
-      setGarantiaSuccess(true);
-      
-      // Recarrega os dados após 2 segundos
-      setTimeout(() => {
-        fetchVinculos();
-        setShowGarantiaModal(false);
-        setSelectedVinculo(null);
-        setSelectedGarantiaId(null);
-      }, 2000);
+    console.log('Garantia associada com sucesso:', result);
+    setGarantiaSuccess(true);
 
-    } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Erro ao associar garantia';
-      setGarantiaError(errorMsg);
-    } finally {
-      setGarantiaLoading(false);
-    }
-  };
+    setTimeout(() => {
+      fetchVinculos();
+      setShowGarantiaModal(false);
+      setSelectedVinculo(null);
+      setSelectedGarantiaId(null);
+    }, 2000);
+
+  } catch (err) {
+    const errorMsg = err instanceof Error ? err.message : 'Erro ao associar garantia';
+    setGarantiaError(errorMsg);
+  } finally {
+    setGarantiaLoading(false);
+  }
+};
 
   const handleAssociarClick = async (vinculo: VinculoCompleto) => {
     setSelectedVinculo(vinculo);

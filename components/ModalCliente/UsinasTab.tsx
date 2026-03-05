@@ -27,7 +27,7 @@ export const UsinasTab: React.FC<UsinasTabProps> = ({
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

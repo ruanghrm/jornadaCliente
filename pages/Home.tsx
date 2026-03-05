@@ -14,6 +14,7 @@ import Tickets from "./Tickets";
 import Configuracoes from "./Configuracoes";
 import Profile from "./Profile";
 import Assinatura from "./Assinatura";
+import Mensagens from "./Mensagens";
 
 
 const Home: React.FC = () => {
@@ -52,7 +53,7 @@ const Home: React.FC = () => {
       case "assinatura":
         return <Assinatura />;
       case "mensagens":
-        return <div>Conteúdo da página Mensagens Automáticas</div>;
+        return <Mensagens />;
       case "portais":
         return <div>Conteúdo da página Portais</div>;
       case "oportunidades":

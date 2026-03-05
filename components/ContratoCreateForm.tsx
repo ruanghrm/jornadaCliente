@@ -100,17 +100,17 @@ type GenericFormState = Record<string, string> & {
  * Schemas Zod
  */
 const monitoramentoSchema = z.object({
-  template_id: z.number({ coerce: true }).positive("Informe o template_id (número)"),
+  template_id: z.coerce.number().positive("Informe o template_id (número)"),
   NOME_CONTRATANTE: z.string().min(1, "Nome do contratante é obrigatório"),
 });
 
 const termoAditivoSchema = z.object({
-  template_id: z.number({ coerce: true }).positive("Informe o template_id (número)"),
+  ttemplate_id: z.coerce.number().positive("Informe o template_id (número)"),
   NOME_CONTRATANTE: z.string().min(1),
 });
 
 const usinaSchema = z.object({
-  template_id: z.number({ coerce: true }).positive("Informe o template_id (número)"),
+  template_id: z.coerce.number().positive("Informe o template_id (número)"),
   contratante_nome: z.string().min(1),
   valor_total_contrato: z.string().min(1),
 });
@@ -278,7 +278,7 @@ export const ContratoCreateForm: React.FC<ContratoCreateFormProps> = ({ onClose,
       if (err instanceof z.ZodError) {
         return err.errors.map((e) => e.message).join("; ");
       }
-      return (err as Error).message;
+      return "Erro desconhecido";
     }
   };
 
